@@ -108,12 +108,14 @@
     }
   },
   "dependencies": {
+    "@types/pdfmake": "^0.1.21",
     "brfs": "^2.0.2",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.7",
     "electron-updater": "^5.0.1",
     "fontkit-next": "^1.8.3",
     "pdfkit": "^0.13.0",
+    "pdfmake": "^0.2.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",

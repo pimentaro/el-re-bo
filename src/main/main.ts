@@ -29,9 +29,32 @@ export default class AppUpdater {
 let mainWindow: BrowserWindow | null = null;
 
 function execute() {
-  const pdfDoc = new PDFDocument();
-  pdfDoc.pipe(fs.createWriteStream('SampleDocument.pdf'));
-  pdfDoc.text('My Sample PDF Document');
+  // const pdfDoc = new PDFDocument();
+  // pdfDoc.pipe(fs.createWriteStream('SampleDocument.pdf'));
+  // pdfDoc.text('My Sample PDF Document');
+  // pdfDoc.end();
+  const fonts = {
+    Roboto: {
+      normal: 'fonts/Roboto-Regular.ttf',
+      bold: 'fonts/Roboto-Medium.ttf',
+      italics: 'fonts/Roboto-Italic.ttf',
+      bolditalics: 'fonts/Roboto-MediumItalic.ttf',
+    },
+  };
+
+  const PdfPrinter = require('pdfmake');
+  const printer = new PdfPrinter(fonts);
+
+  const docDefinition = {
+    // ...
+  };
+
+  const options = {
+    // ...
+  };
+
+  const pdfDoc = printer.createPdfKitDocument(docDefinition, options);
+  pdfDoc.pipe(fs.createWriteStream('document.pdf'));
   pdfDoc.end();
 }
 
