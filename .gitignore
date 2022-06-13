@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+*.pdf
 
 # Runtime data
 pids

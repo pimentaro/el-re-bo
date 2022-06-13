@@ -8,12 +8,15 @@
  * When running `npm run build` or `npm run build:main`, this file is compiled to
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
+import fs from 'fs';
 import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import PDFDocument from 'pdfkit';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import logger from '../../logger';
 
 export default class AppUpdater {
   constructor() {
@@ -25,10 +28,23 @@ export default class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
+function execute() {
+  const pdfDoc = new PDFDocument();
+  pdfDoc.pipe(fs.createWriteStream('SampleDocument.pdf'));
+  pdfDoc.text('My Sample PDF Document');
+  pdfDoc.end();
+}
+
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+  try {
+    execute();
+    logger.info('tudo ok');
+  } catch (error) {
+    logger.error(error);
+  }
 });
 
 if (process.env.NODE_ENV === 'production') {

@@ -28,7 +28,7 @@ const devtoolsConfig =
 const configuration: webpack.Configuration = {
   ...devtoolsConfig,
 
-  mode: 'production',
+  mode: 'development',
 
   target: ['web', 'electron-renderer'],
 

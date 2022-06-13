@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /**
  * Webpack config for production electron main process
  */
@@ -7,6 +8,7 @@ import webpack from 'webpack';
 import { merge } from 'webpack-merge';
 import TerserPlugin from 'terser-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import nodeExternals from 'webpack-node-externals';
 import baseConfig from './webpack.config.base';
 import webpackPaths from './webpack.paths';
 import checkNodeEnv from '../scripts/check-node-env';
@@ -24,6 +26,7 @@ const devtoolsConfig =
 
 const configuration: webpack.Configuration = {
   ...devtoolsConfig,
+  // externalsPresets: { node: true }, // in order to ignore built-in modules like path, fs, etc.
 
   mode: 'production',
 
