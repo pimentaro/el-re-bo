@@ -13,7 +13,6 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import PDFDocument from 'pdfkit';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import logger from '../../logger';
@@ -46,6 +45,7 @@ function execute() {
   const printer = new PdfPrinter(fonts);
 
   const docDefinition = {
+    content: [`abc`],
     // ...
   };
 
@@ -54,7 +54,7 @@ function execute() {
   };
 
   const pdfDoc = printer.createPdfKitDocument(docDefinition, options);
-  pdfDoc.pipe(fs.createWriteStream('document.pdf'));
+  pdfDoc.pipe(fs.createWriteStream('documento.pdf'));
   pdfDoc.end();
 }
 
